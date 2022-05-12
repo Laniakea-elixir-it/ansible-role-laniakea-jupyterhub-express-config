@@ -1,4 +1,4 @@
-Role Name
+laniakea.jupyterhub_express_config
 =========
 
 Ansible role to configure the express image of JupyterHub in Laniakea after its deployment.
