@@ -1,0 +1,17 @@
+---
+
+- name: Change JupyterHub user password
+  import_tasks: change_password.yml
+
+- name: Start jupyterhub
+  systemd:
+    state: started
+    enabled: yes
+    name: "{{ service }}"
+  become: yes
+
+- name: Wait JupyterHub
+  wait_for:
+    host: 127.0.0.1
+    port: "{{ port }}"
+    timeout: 300
