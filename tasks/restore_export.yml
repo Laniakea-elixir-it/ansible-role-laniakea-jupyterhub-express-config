@@ -1,0 +1,14 @@
+---
+
+- name: Unarchive export_dir
+  unarchive:
+    src: "{{ export_dir_tar }}"
+    dest: /
+    extra_opts: --same-owner
+    remote_src: yes
+    creates: /export
+
+- name: Remove export_dir.tar.gz
+  file:
+    path: "{{ export_dir_tar }}"
+    state: absent

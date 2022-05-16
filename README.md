@@ -7,11 +7,12 @@ The jupyterhub service is enabled and started and the jupyterhub admin password 
 Role Variables
 --------------
 
-| Variable | Description                      | Default            |
-| -------- | -------------------------------- | ------------------ |
-| username | JupyterHub admin username        | jupyterhub         |
-| service  | Name of the JupyterHub unit file | jupyterhub.service |
-| port     | Port where JupyterHub is served  | 80                 |
+| Variable       | Description                      | Default                |
+| -------------- | -------------------------------- | ---------------------- |
+| username       | JupyterHub admin username        | jupyterhub             |
+| service        | Name of the JupyterHub unit file | jupyterhub.service     |
+| port           | Port where JupyterHub is served  | 80                     |
+| export_dir_tar | Path to the export dir archive   | /opt/export_dir.tar.gz |
 
 
 Example Playbook

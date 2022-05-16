@@ -3,6 +3,9 @@
 - name: Change JupyterHub user password
   import_tasks: change_password.yml
 
+- name: Restore export_dir
+  import_tasks: restore_export.yml
+
 - name: Start jupyterhub
   systemd:
     state: started
