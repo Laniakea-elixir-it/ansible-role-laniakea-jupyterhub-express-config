@@ -6,7 +6,7 @@
     dest: /
     extra_opts: --same-owner
     remote_src: yes
-    creates: /export
+    creates: /export/jupyterhub
 
 - name: Remove export_dir.tar.gz
   file:
