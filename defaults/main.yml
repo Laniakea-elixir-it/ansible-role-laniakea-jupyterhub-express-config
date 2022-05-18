@@ -4,3 +4,6 @@ username: jupyterhub
 service: jupyterhub.service
 port: 80
 export_dir_tar: /opt/export_dir.tar.gz
+
+retrieve_passphrase_from_vault: false
+
