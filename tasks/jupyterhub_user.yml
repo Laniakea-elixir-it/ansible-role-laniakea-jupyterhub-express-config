@@ -20,7 +20,7 @@
     password: "{{ __password__ | string |  password_hash('sha512') }}"
     update_password: always
   no_log: True
-  when: jupyterhub_username == jupyterhub
+  when: jupyterhub_username == 'jupyterhub'
 
 - name: Create JupyterHub user and set jupyterhub password
   user:
@@ -30,14 +30,14 @@
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
   no_log: True
-  when: jupyterhub_username != jupyterhub
+  when: jupyterhub_username != 'jupyterhub'
 
 - name: Remove jupyterhub user and home directory if no more needed
   user:
     name: jupyterhub
     state: absent
     remove: yes
-  when: jupyterhub_username == jupyterhub
+  when: jupyterhub_username != 'jupyterhub'
 
 - name: Save password on file
   copy:
