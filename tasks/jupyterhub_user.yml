@@ -32,6 +32,13 @@
   no_log: True
   when: jupyterhub_username != jupyterhub
 
+- name: Remove jupyterhub user and home directory if no more needed
+  user:
+    name: jupyterhub
+    state: absent
+    remove: yes
+  when: jupyterhub_username == jupyterhub
+
 - name: Save password on file
   copy:
     content: "{{ __password__ }}"
