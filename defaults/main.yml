@@ -1,9 +1,12 @@
 ---
+jupyterhub_username: jupyterhub
+jupyterhub_password: random
 
-username: jupyterhub
 service: jupyterhub.service
 port: 80
+
+# Export directory backup is done during cloud imagee creation and stored
+# by default in /opt/export_dir.tar.gz.
+# To change this behaviour check the laniakea-ci-infrastructure playbook
+# https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/blob/master/cloud-images/playbooks/jupyterhub.yml
 export_dir_tar: /opt/export_dir.tar.gz
-
-retrieve_passphrase_from_vault: false
-

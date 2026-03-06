@@ -1,0 +1,43 @@
+---
+# By default a jupyterhub user is created during cloud image creation on laniakea-ci-infrastructure
+# If same user is used. the password is changed.
+# If a new userd is created the old one is deleted
+- name: Get user password extenrally (e.g. from Vault) if available
+  set_fact:
+    __password__: '{{ jupyterhub_password }}'
+  no_log: True
+  when: jupyterhub_password is defined
+
+- name: Alternatively create user random password.
+  set_fact:
+    __password__: "{{ lookup('password', '/dev/null length=20') }}"
+  no_log: True
+  when: jupyterhub_password is defined and jupyterhub_password == 'random'
+
+- name: Update jupyterhub user password
+  user:
+    name: "{{ jupyterhub_username }}"
+    password: "{{ __password__ | string |  password_hash('sha512') }}"
+    update_password: always
+  no_log: True
+  when: jupyterhub_username == jupyterhub
+
+- name: Create JupyterHub user and set jupyterhub password
+  user:
+    name: "{{ jupyterhub_username }}"
+    groups: sudo # sudo is the group on ubuntu. on rocky it is wheel
+    state: present
+    password: "{{ __password__ | string | password_hash('sha512') }}"
+    update_password: on_create
+  no_log: True
+  when: jupyterhub_username != jupyterhub
+
+- name: Save password on file
+  copy:
+    content: "{{ __password__ }}"
+    dest: /home/{{ jupyterhub_username }}/pssw.txt
+    force: no
+    owner: "{{ jupyterhub_username }}"
+    group: "{{ jupyterhub_username }}"
+  no_log: True
+  when: jupyterhub_password == 'random'
