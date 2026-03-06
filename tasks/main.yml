@@ -1,7 +1,7 @@
 ---
 
 - name: Create or update JupyterHub user and password
-  import_task: jupyterhub_user.yml
+  import_tasks: jupyterhub_user.yml
 
 - name: Restore export_dir
   import_tasks: restore_export.yml
